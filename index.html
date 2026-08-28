@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="description" content="Dayyan - One Page Portfolio">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<title>Dayyan - Portfolio</title>
+
+<!-- CSS Dependencies -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/style.css">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Inter:300,400,600" rel="stylesheet">
+
+<style>
+     /* --- PENGATURAN DASAR & TIPOGRAFI --- */
+     html { scroll-behavior: smooth; }
+     body {
+          font-family: 'Inter', sans-serif;
+          background-color: #0f0f0f;
+          color: #999999;
+          /* Transisi ditambahkan font-size agar animasi pembesaran teks mulus */
+          transition: background-color 0.4s, color 0.4s, font-size 0.5s ease;
+          overflow-x: hidden;
+     }
+     h1, h2, h3, h4, h5 { 
+          font-family: 'Playfair Display', serif; 
+          color: #f1f1f1; 
+          /* Transisi pada heading agar ikut mulus */
+          transition: font-size 0.5s ease, color 0.4s; 
+     }
+     .amp { font-family: 'Times New Roman', Times, serif; font-style: normal; }
+
+     /* --- PENGATURAN UKURAN TEKS --- */
+     body.text-small { font-size: 13px; }
+     body.text-small h1 { font-size: 3.0rem; }
+     body.text-small h2 { font-size: 26px; }
+     body.text-small h3 { font-size: 22px; }
+
+     body.text-medium { font-size: 15px; } 
+     body.text-medium h1 { font-size: 4.0rem; }
+     body.text-medium h2 { font-size: 36px; }
+     body.text-medium h3 { font-size: 20px; }
+
+     body.text-large { font-size: 17px; }
+     body.text-large h1 { font-size: 5.0rem; }
+     body.text-large h2 { font-size: 40px; }
+     body.text-large h3 { font-size: 36px; }
+
+     /* --- NAVIGASI --- */
+     .navbar-default {
+          background-color: rgba(15, 15, 15, 0.95);
+          border-color: #181818;
+          transition: all 0.3s ease;
+     }
+     .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a { color: #e0e0e0; transition: color 0.3s; }
+     .navbar-default .navbar-nav>li>a:hover { color: #bda664; }
+
+     /* --- SECTION: BERANDA (HOME) --- */
+     #home { position: relative; overflow: hidden; height: 100vh; display: flex; align-items: center; }
+     .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+     #home h1 { margin-bottom: 15px; color: #fff; }
+     #home h4 { font-family: 'Inter', sans-serif; font-weight: 300; color: rgba(255, 255, 255, 0.8); margin-bottom: 30px; letter-spacing: 1px; line-height: 1.6;}
+     .btn-outline {
+          background: transparent; border: 1px solid #bda664; color: #bda664; padding: 12px 30px;
+          border-radius: 30px; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; font-weight: 600; transition: 0.3s;
+     }
+     .btn-outline:hover { background: #bda664; color: #111; text-decoration: none; }
+
+     /* --- SECTION: TENTANG SAYA (ABOUT) --- */
+     #about { padding: 120px 0; min-height: 80vh; display: flex; align-items: center; }
+     .about-title-main { text-align: center; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 60px; font-weight: 700; }
+     .profile-photo-box img { width: 100%; max-width: 350px; border-radius: 4px; filter: grayscale(100%); box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: block; margin: 0 auto; }
+     .photo-caption { font-size: 11px; text-align: center; margin-top: 12px; letter-spacing: 1px; opacity: 0.6; }
+     .biography-text-box { line-height: 1.9; text-align: justify; }
+     .biography-text-box p { margin-bottom: 20px; }
+
+     /* --- KEPALA PROYEK (PROJECT HEADERS) --- */
+     .project-section { padding: 100px 0; border-top: 1px solid rgba(150,150,150,0.05); }
+     .project-category-line { display: flex; align-items: center; justify-content: center; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #bda664; margin-bottom: 20px; font-weight: 600; }
+     .project-category-line::before, .project-category-line::after { content: ""; display: inline-block; width: 30px; height: 1px; background-color: #bda664; margin: 0 15px; }
+     .project-main-title { font-size: 42px; margin-bottom: 25px; letter-spacing: 0.5px; text-align: center; }
+     .project-main-title i { font-style: italic; font-weight: 400; }
+     .project-intro { font-size: 15px; line-height: 1.8; max-width: 700px; margin: 0 auto 50px auto; color: #a0a0a0; text-align: center; }
+
+     /* --- UI KARTU (INGGRIS & JERMAN) --- */
+     .project-card {
+          background-color: #181818; border-radius: 8px; padding: 35px; margin-bottom: 30px;
+          transition: transform 0.3s ease; display: flex; flex-direction: column; justify-content: flex-start; height: 100%;
+     }
+     .project-card:hover { transform: translateY(-5px); }
+     .tag-group { margin-bottom: 20px; }
+     .tag { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #bda664; background-color: #232015; padding: 5px 10px; border-radius: 4px; margin-right: 6px; margin-bottom: 6px; font-weight: 600; }
+     .project-card h3 { margin-bottom: 15px; margin-top: 0; }
+     .project-card h4 { font-size: 14px; color: #bda664; margin-bottom: 12px; font-style: italic; font-family: 'Inter', sans-serif; }
+     .project-card p { line-height: 1.7; margin-bottom: 0; color: #999; }
+     .feature-list { padding-left: 15px; margin-bottom: 0; color: #999; line-height: 1.8; }
+     .feature-list li { margin-bottom: 5px; }
+
+     /* --- UI DAFTAR MATERI (AGAMA ISLAM) --- */
+     .content-section-title { color: #f1f1f1; margin-bottom: 25px; letter-spacing: 0.5px; text-align: left; }
+     .religion-item-box { margin-bottom: 35px; padding-bottom: 25px; border-bottom: 1px solid rgba(150, 150, 150, 0.1); }
+     .religion-item-box h4 { font-family: 'Playfair Display', serif; font-size: 18px; color: #f1f1f1; margin-bottom: 8px; font-weight: 700; }
+     .religion-item-box p { line-height: 1.7; opacity: 0.75; margin: 0; text-align: justify; color: #999; }
+
+     /* --- TEMA TERANG & GELAP --- */
+     body.dark-mode { background-color: #0f0f0f; color: #a0a0a0; }
+     body:not(.dark-mode) { background-color: #fafafa; color: #444; }
+     
+     body:not(.dark-mode) .navbar-default { background-color: rgba(255, 255, 255, 0.98); border-color: #eee; }
+     body:not(.dark-mode) .navbar-default .navbar-brand, body:not(.dark-mode) .navbar-default .navbar-nav>li>a { color: #111; }
+     
+     body:not(.dark-mode) h1, body:not(.dark-mode) h2, body:not(.dark-mode) h3, body:not(.dark-mode) h4, body:not(.dark-mode) h5 { color: #111; }
+     body:not(.dark-mode) .project-intro, body:not(.dark-mode) .biography-text-box, body:not(.dark-mode) .religion-item-box p { color: #555; }
+     
+     body:not(.dark-mode) .project-card { background-color: #fff; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+     body:not(.dark-mode) .tag { background-color: #f4eedb; color: #967d34; }
+     
+     /* --- TOMBOL PENGATURAN (KIRI BAWAH) --- */
+     .settings-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: #bda664; color: #111; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 9999; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.3s; }
+     .settings-btn:hover { transform: rotate(90deg); }
+     .settings-panel { position: fixed; bottom: 90px; left: 30px; background: #fff; color: #333; padding: 20px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); z-index: 9999; width: 260px; display: none; transition: 0.3s; }
+     .settings-panel.active { display: block; }
+     .settings-panel h4 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; font-size: 16px; font-weight: bold; font-family: 'Inter', sans-serif;}
+     .close-settings { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 20px; }
+     .settings-group { margin-bottom: 15px; }
+     .settings-group h5 { margin-bottom: 10px; font-weight: 600; font-size: 13px; font-family: 'Inter', sans-serif; }
+     .settings-group button { padding: 6px 12px; margin-right: 5px; margin-bottom: 5px; border: 1px solid #ccc; background: #f9f9f9; color: #333; cursor: pointer; border-radius: 6px; font-size: 12px; transition: 0.2s;}
+     
+     /* HIGHLIGHT PENGATURAN AKTIF */
+     .settings-group button.active-setting {
+          background: #bda664 !important;
+          color: #111 !important;
+          border-color: #bda664 !important;
+          font-weight: 600;
+     }
+
+     body.dark-mode .settings-panel { background: #181818; color: #f1f1f1; border: 1px solid #333; }
+     body.dark-mode .settings-panel h4 { border-bottom-color: #333; }
+     body.dark-mode .settings-group button { background: #222; border-color: #444; color: #ccc; }
+     body.dark-mode .settings-group button:hover { background: #bda664; color: #111; border-color: #bda664; }
+
+     /* --- GARIS GRID & TRANSISI AWAL --- */
+     .grid-bg-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; display: flex; justify-content: space-evenly; }
+     .grid-line-v { width: 1px; height: 0%; background: rgba(255, 255, 255, 0.05); transition: height 1.5s cubic-bezier(0.77, 0, 0.175, 1); }
+     .grid-line-h { position: absolute; left: 0; width: 0%; height: 1px; background: rgba(255, 255, 255, 0.05); transition: width 1.5s cubic-bezier(0.77, 0, 0.175, 1); }
+     body:not(.dark-mode) .grid-line-v, body:not(.dark-mode) .grid-line-h { background: rgba(0, 0, 0, 0.03); }
+
+     .page-transition-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: #0f0f0f; z-index: 99999; transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); transform: translateY(0%); }
+     body:not(.dark-mode) .page-transition-screen { background-color: #ffffff; }
+     body.page-loaded .page-transition-screen { transform: translateY(-100%); }
+     body.page-loaded .grid-line-v { height: 100%; transition-delay: 0.3s; }
+     body.page-loaded .grid-line-h { width: 100%; transition-delay: 0.3s; }
+
+     /* --- SCROLL REVEAL ANIMATION --- */
+     .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; will-change: opacity, transform; }
+     .scroll-reveal.active { opacity: 1; transform: translateY(0); }
+     .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
+
+     /* Menyusun Z-Index konten agar di atas Grid */
+     .navbar, section, footer { position: relative; z-index: 10; }
+</style>
+</head>
+<body class="text-medium dark-mode">
+
+<!-- LAYAR TRANSISI AWAL & GRID BACKGROUND -->
+<div class="page-transition-screen"></div>
+<div class="grid-bg-container">
+     <div class="grid-line-v"></div><div class="grid-line-v"></div><div class="grid-line-v"></div>
+     <div class="grid-line-v"></div><div class="grid-line-v"></div><div class="grid-line-v"></div>
+     <div class="grid-line-h" style="top: 33%;"></div><div class="grid-line-h" style="top: 66%;"></div>
+</div>
+
+<!-- TOMBOL & PANEL PENGATURAN (KIRI BAWAH) -->
+<div id="settings-btn" class="settings-btn" title="Pengaturan"><i class="fa fa-cog"></i></div>
+<div id="settings-panel" class="settings-panel">
+     <span class="close-settings" id="close-settings">&times;</span>
+     <h4>Pengaturan Tampilan</h4>
+     
+     <div class="settings-group">
+          <h5>Mode Warna</h5>
+          <!-- Tambahan ID dan class untuk fungsi highlight -->
+          <button id="btn-theme-light" class="btn-theme" onclick="setTheme('light')"><i class="fa fa-sun-o"></i> Terang</button>
+          <button id="btn-theme-dark" class="btn-theme" onclick="setTheme('dark')"><i class="fa fa-moon-o"></i> Gelap</button>
+     </div>
+     
+     <div class="settings-group">
+          <h5>Ukuran Teks</h5>
+          <!-- Tambahan ID dan class untuk fungsi highlight -->
+          <button id="btn-size-small" class="btn-size" onclick="setTextSize('small')">Kecil</button>
+          <button id="btn-size-medium" class="btn-size" onclick="setTextSize('medium')">Sedang</button>
+          <button id="btn-size-large" class="btn-size" onclick="setTextSize('large')">Besar</button>
+     </div>
+</div>
+
+<!-- NAVIGASI NAVBAR -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+     <div class="container">
+          <div class="navbar-header">
+               <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+               </button>
+               <a href="#home" class="navbar-brand">Dayyan</a>
+          </div>
+          <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#about">Tentang Saya</a></li>
+                    <li><a href="#portfolio-english">B. Inggris</a></li>
+                    <li><a href="#portfolio-jerman">B. Jerman</a></li>
+                    <li><a href="#portfolio-agama">Agama</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+               </ul>
+          </div>
+  </div>
+</div>
+
+<!-- ==============================================
+     SECTION 1: BERANDA (HOME)
+=============================================== -->
+<section id="home">
+     <!-- Video Latar Belakang -->
+     <video autoplay loop muted playsinline class="bg-video">
+          <source src="video-background.mp4" type="video/mp4">
+     </video>
+     <div class="overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.65); z-index:-1;"></div>
+     
+     <div class="container">
+          <div class="row">
+               <div class="col-md-10 col-md-offset-1 text-center scroll-reveal">
+                    <span style="color: #bda664; font-size: 14px; letter-spacing: 3px; display: block; margin-bottom: 20px; text-transform: uppercase;">Selamat Datang</span>
+                    <h1>Halo! Nama Saya Dayyan</h1>
+                    <h4>Saya adalah siswa SMK Negeri 6 Kota Tangerang Selatan yang memiliki minat kuat dalam bidang teknologi informasi dan pengembangan perangkat lunak.</h4>
+                    <a href="#portfolio-english" class="btn-outline">Lihat Karya Saya</a>
+               </div>
+          </div>
+     </div>
+</section>
+
+<!-- ==============================================
+     SECTION 2: TENTANG SAYA (ABOUT)
+=============================================== -->
+<section id="about">
+     <div class="container" style="max-width: 1050px;">
+          <div class="row">
+               <div class="col-md-12 scroll-reveal">
+                    <h2 class="about-title-main">ABOUT ME...</h2>
+               </div>
+          </div>
+          <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
+               <div class="col-md-4 col-sm-5 scroll-reveal delay-1">
+                    <div class="profile-photo-box">
+                         <img src="images/about-image.png" alt="Dayyan Profile Photo" class="img-responsive">
+                         <div class="photo-caption">Photo Credit: Yanz-Techno </div>
+                    </div>
+               </div>
+               <div class="col-md-8 col-sm-7 scroll-reveal delay-2">
+                    <div class="biography-text-box">
+                         <p>Seorang siswa yang memiliki minat mendalam di bidang teknologi informasi dan pengembangan perangkat lunak. Selalu aktif mengeksplorasi dunia pemrograman dan pembuatan karya digital yang kreatif.</p>
+                         <p>Berfokus pada pengembangan web, penguasaan berbagai bahasa pemrograman, serta konsisten meningkatkan kemampuan diri melalui berbagai proyek praktikal di sekolah maupun mandiri.</p>
+                         <p>Aktif dalam mengeksplorasi teknologi baru, merancang struktur antarmuka yang bersih, serta berkomitmen untuk menghasilkan karya digital yang fungsional dan berdampak positif.</p>
+                         <p style="margin-top: 30px; font-size: 12px; letter-spacing: 1px; opacity: 0.7;">Dayyan has more planned.</p>
+                         <p style="font-size: 11px; letter-spacing: 1px; opacity: 0.5;">He is a proud member of SMK Negeri 6 Tangerang Selatan Student Association.</p>
+                    </div>
+               </div>
+          </div>
+     </div>
+</section>
+
+<!-- ==============================================
+     SECTION 3: PORTFOLIO - BAHASA INGGRIS
+=============================================== -->
+<section id="portfolio-english" class="project-section">
+     <div class="container">
+          <div class="row">
+               <div class="col-md-10 col-md-offset-1 scroll-reveal">
+                    <div class="project-category-line">Portfolio 01</div>
+                    <h2 class="project-main-title">Analytical Exposition <i>Text</i></h2>
+                    <p class="project-intro">Menganalisis fenomena dan merumuskan opini melalui struktur teks Analytical Exposition. Proyek ini membedah tesis, argumen logis, dan fitur kebahasaan bahasa Inggris.</p>
+               </div>
+          </div>
+          <div class="row">
+               <div class="col-md-5 col-md-offset-1 col-sm-12" style="display: flex; flex-direction: column;">
+                    <div class="project-card scroll-reveal delay-1">
+                         <div class="tag-group">
+                              <span class="tag">Exposition</span><span class="tag">Thesis</span>
+                         </div>
+                         <h3>Thesis & Introduction</h3>
+                         <p>Introducing the topic and indicating the writer’s point of view to the readers clearly.</p>
+                    </div>
+               </div>
+               <div class="col-md-5 col-sm-12" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="project-card scroll-reveal delay-2" style="margin-bottom: 30px;">
+                         <div class="tag-group">
+                              <span class="tag">Arguments</span><span class="tag">Body</span>
+                         </div>
+                         <h3>Argument / Body</h3>
+                         <p>Explaining the argument to support the writer’s position. Elaborating logical points to strengthen the viewpoint.</p>
+                    </div>
+                    <div class="project-card scroll-reveal delay-2" style="margin-bottom: 0;">
+                         <div class="tag-group">
+                              <span class="tag">Reiteration</span><span class="tag">Conclusion</span>
+                         </div>
+                         <h3>Reiteration (Conclusion)</h3>
+                         <p>Restating the writer’s point of view to strengthen the thesis and summarizing key arguments.</p>
+                    </div>
+               </div>
+          </div>
+          <div class="row" style="margin-top: 30px;">
+               <div class="col-md-10 col-md-offset-1 col-sm-12">
+                    <div class="project-card scroll-reveal delay-1">
+                         <div class="tag-group"><span class="tag">Language</span><span class="tag">Features</span></div>
+                         <h3>Language Features</h3>
+                         <ul class="feature-list">
+                              <li><strong>Using simple present tense:</strong> Is, am, are, Verb 1, Verb 1 + s/es.</li>
+                              <li><strong>Using connective:</strong> First, Second, Finally, I believe, I think, You should.</li>
+                              <li><strong>Using expression of stating opinion</strong> & <strong>Passive voice</strong>.</li>
+                              <li><strong>Using conjunction:</strong> Consequently, Similar to, Although.</li>
+                         </ul>
+                    </div>
+               </div>
+          </div>
+     </div>
+</section>
+
+<!-- ==============================================
+     SECTION 4: PORTFOLIO - BAHASA JERMAN
+=============================================== -->
+<section id="portfolio-jerman" class="project-section">
+     <div class="container">
+          <div class="row">
+               <div class="col-md-10 col-md-offset-1 scroll-reveal">
+                    <div class="project-category-line">Portfolio 02</div>
+                    <h2 class="project-main-title">Projekte <span class="amp">&amp;</span> <i>Grundstufen</i></h2>
+                    <p class="project-intro">Materi dasar pembelajaran Bahasa Jerman tingkat pemula (A1.1). Membahas perkenalan diri, asal negara, domisili, dan tata bahasa esensial.</p>
+               </div>
+          </div>
+          <div class="row">
+               <div class="col-md-5 col-md-offset-1 col-sm-12" style="display: flex; flex-direction: column;">
+                    <div class="project-card scroll-reveal delay-1">
+                         <div class="tag-group"><span class="tag">Modul 1</span><span class="tag">Perkenalan</span></div>
+                         <h3>Sich Vorstellen</h3>
+                         <h4>Begrüßung <span class="amp">&amp;</span> Name</h4>
+                         <p>Memahami salam sapaan (Guten Tag, Hallo) dan ungkapan perkenalan nama menggunakan kalimat <i>"Ich heiße..."</i>.</p>
+                    </div>
+               </div>
+               <div class="col-md-5 col-sm-12" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="project-card scroll-reveal delay-2" style="margin-bottom: 30px;">
+                         <div class="tag-group"><span class="tag">Modul 2</span><span class="tag">Asal Negara</span></div>
+                         <h3>Herkunft <span class="amp">&amp;</span> Nationalität</h3>
+                         <h4>Woher kommen Sie?</h4>
+                         <p>Menjelaskan negara asal dan kewarganegaraan menggunakan kata kerja <i>kommen</i> (contoh: <i>"Ich komme aus Indonesien"</i>).</p>
+                    </div>
+                    <div class="project-card scroll-reveal delay-2" style="margin-bottom: 0;">
+                         <div class="tag-group"><span class="tag">Modul 3</span><span class="tag">Tempat</span></div>
+                         <h3>Wohnort <span class="amp">&amp;</span> Adresse</h3>
+                         <h4>Wo wohnen Sie?</h4>
+                         <p>Menyebutkan tempat tinggal saat ini menggunakan kata kerja <i>wohnen</i> (contoh: <i>"Ich wohne in Jakarta"</i>).</p>
+                    </div>
+               </div>
+          </div>
+          <div class="row" style="margin-top: 30px;">
+               <div class="col-md-10 col-md-offset-1 col-sm-12">
+                    <div class="project-card scroll-reveal delay-1">
+                         <div class="tag-group"><span class="tag">Modul 4</span><span class="tag">Angka & Usia</span></div>
+                         <h3>Zahlen <span class="amp">&amp;</span> Alter</h3>
+                         <h4>Wie alt sind Sie?</h4>
+                         <p>Penguasaan angka dasar (0-100) untuk menyebutkan usia (<i>"Ich bin ... Jahre alt"</i>) dan nomor telepon sederhana.</p>
+                    </div>
+               </div>
+          </div>
+     </div>
+</section>
+
+<!-- ==============================================
+     SECTION 5: PORTFOLIO - AGAMA ISLAM
+=============================================== -->
+<section id="portfolio-agama" class="project-section">
+     <div class="container">
+          <div class="row">
+               <div class="col-md-10 col-md-offset-1 scroll-reveal">
+                    <div class="project-category-line">Portfolio 03</div>
+                    <h2 class="project-main-title">Mencintai IPTEK <i>dalam Islam</i></h2>
+                    <p class="project-intro">Pembahasan integrasi harmonis antara ilmu pengetahuan, etika teknologi modern, dan nilai-nilai keimanan berbasis ajaran Islam.</p>
+               </div>
+          </div>
+          <div class="row">
+               <div class="col-md-8 col-md-offset-2">
+                    <div class="scroll-reveal delay-1" style="margin-bottom: 50px;">
+                         <h3 class="content-section-title">Dalil <span class="amp">&amp;</span> Konsep Ulul Albab</h3>
+                         <div class="religion-item-box">
+                              <h4>Q.S. Ar-Rahman [55]: 33</h4>
+                              <p>Anjuran bagi jin dan manusia untuk menembus/menjelajahi penjuru langit dan bumi dengan kekuatan ilmu pengetahuan (sulthan).</p>
+                         </div>
+                         <div class="religion-item-box" style="border-bottom: none; padding-bottom: 0;">
+                              <h4>Kewajiban Menuntut Ilmu</h4>
+                              <p>Pentingnya menguasai ilmu sains dan teknologi sebagai wujud ibadah serta sarana mendekatkan diri kepada Sang Pencipta dan bermanfaat bagi alam semesta.</p>
+                         </div>
+                    </div>
+                    <div class="scroll-reveal delay-2">
+                         <h3 class="content-section-title">Penerapan <span class="amp">&amp;</span> Etika IPTEK</h3>
+                         <div class="religion-item-box">
+                              <h4>Adab Penggunaan Teknologi</h4>
+                              <p>Memanfaatkan IPTEK untuk kemaslahatan bersama, menghindari penyebaran hoaks, serta mematuhi batasan etika syariat dalam dunia digital.</p>
+                         </div>
+                         <div class="religion-item-box" style="border-bottom: none; padding-bottom: 0;">
+                              <h4>Dampak <span class="amp">&amp;</span> Kontribusi Historis</h4>
+                              <p>Analisis kritis dampak teknologi modern dan meneladani semangat penemu Muslim masa lalu (seperti Al-Khawarizmi) dalam memelopori sains.</p>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+</section>
+
+<!-- ==============================================
+     FOOTER / CONTACT
+=============================================== -->
+<footer id="contact" style="padding: 60px 0 20px 0; border-top: 1px solid rgba(150,150,150,0.1);">
+     <div class="container">
+          <div class="row">
+               <div class="col-md-5 col-md-offset-1 col-sm-6 scroll-reveal">
+                    <h3 style="font-size: 24px; color: #bda664; margin-bottom: 15px;">Dayyan Nafi</h3>
+                    <p style="font-size: 14px; line-height: 1.8;">Tertarik untuk berdiskusi seputar pemrograman, desain web, atau bertukar ide proyek kolaboratif? Jangan ragu untuk menghubungi saya melalui kontak yang tersedia.</p>
+               </div>
+               <div class="col-md-4 col-md-offset-1 col-sm-6 scroll-reveal delay-1">
+                    <h3 style="font-size: 24px; margin-bottom: 15px; color: #f1f1f1;">Hubungi Saya</h3>
+                    <p style="font-size: 14px;"><i class="fa fa-globe" style="color:#bda664; margin-right: 10px; width: 15px;"></i> Tangerang Selatan, Indonesia</p>
+                    <p style="font-size: 14px;"><i class="fa fa-phone" style="color:#bda664; margin-right: 10px; width: 15px;"></i> 0859106983973</p>
+                    <p style="font-size: 14px;"><i class="fa fa-envelope-o" style="color:#bda664; margin-right: 10px; width: 15px;"></i> dayyannafi@gmail.com</p>
+               </div>
+          </div>
+          <div class="row" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(150,150,150,0.1);">
+               <div class="col-md-6 col-sm-6">
+                    <p style="font-size: 13px; opacity: 0.6; margin: 0;">&copy; 2026 Dayyan Nafi. All Rights Reserved.</p>
+               </div>
+               <div class="col-md-6 col-sm-6 text-right">
+                    <ul class="social-icon" style="margin: 0;">
+                         <li><a href="https://wa.me/62859106983973" class="fa fa-whatsapp" target="_blank" rel="noopener noreferrer" title="WhatsApp"></a></li>
+                         <li><a href="https://instagram.com/xxzupx" class="fa fa-instagram" target="_blank" rel="noopener noreferrer" title="Instagram"></a></li>
+                         <li><a href="https://tiktok.com/@dayyan_nafi" class="fa fa-music" target="_blank" rel="noopener noreferrer" title="TikTok"></a></li>
+                    </ul>
+               </div>
+          </div>
+     </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
+
+<script>
+     const settingsBtn = document.getElementById('settings-btn');
+     const settingsPanel = document.getElementById('settings-panel');
+     const closeSettings = document.getElementById('close-settings');
+
+     if (settingsBtn && settingsPanel) {
+          settingsBtn.addEventListener('click', () => { settingsPanel.classList.toggle('active'); });
+     }
+     if (closeSettings && settingsPanel) {
+          closeSettings.addEventListener('click', () => { settingsPanel.classList.remove('active'); });
+     }
+
+     function setTheme(theme) {
+          if (theme === 'dark') {
+               document.body.classList.add('dark-mode');
+               localStorage.setItem('site_theme', 'dark');
+          } else {
+               document.body.classList.remove('dark-mode');
+               localStorage.setItem('site_theme', 'light');
+          }
+          
+          // Memberikan highlight pada tombol mode yang aktif
+          document.querySelectorAll('.btn-theme').forEach(btn => btn.classList.remove('active-setting'));
+          const activeBtn = document.getElementById('btn-theme-' + theme);
+          if(activeBtn) activeBtn.classList.add('active-setting');
+     }
+
+     function setTextSize(size) {
+          document.body.classList.remove('text-small', 'text-medium', 'text-large');
+          document.body.classList.add('text-' + size);
+          localStorage.setItem('site_text_size', size);
+          
+          // Memberikan highlight pada tombol ukuran yang aktif
+          document.querySelectorAll('.btn-size').forEach(btn => btn.classList.remove('active-setting'));
+          const activeBtn = document.getElementById('btn-size-' + size);
+          if(activeBtn) activeBtn.classList.add('active-setting');
+     }
+
+     window.addEventListener('DOMContentLoaded', () => {
+          let savedTheme = localStorage.getItem('site_theme') || 'dark';
+          setTheme(savedTheme);
+
+          let savedTextSize = localStorage.getItem('site_text_size') || 'medium';
+          setTextSize(savedTextSize);
+
+          setTimeout(() => { document.body.classList.add('page-loaded'); }, 200);
+
+          const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+          const observer = new IntersectionObserver((entries, obs) => {
+               entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                         entry.target.classList.add('active');
+                    }
+               });
+          }, observerOptions);
+
+          document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+     });
+</script>
+</body>
+</html>
